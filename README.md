@@ -1,6 +1,6 @@
 ## Project 2: 3D Motion Planning ##
 
-### 1. Test that `motion_planning.py` is a modified version of `backyard_flyer_solution.py` for simple path planning. Verify that both scripts work. Then, compare them side by side and describe in words how each of the modifications implemented in `motion_planning.py` is functioning. ###
+#### 1. Test that `motion_planning.py` is a modified version of `backyard_flyer_solution.py` for simple path planning. Verify that both scripts work. Then, compare them side by side and describe in words how each of the modifications implemented in `motion_planning.py` is functioning. ####
 
 Both `backyard_flyer_solution.py` and `motion_planning.py` are fully functional. Here they are in action:
 
@@ -62,7 +62,7 @@ Examining `planning_utils.py` further, the grid is created by reading in csv dat
 The A* algorithm is more complex. It first uses a set of predefined actions (NSEW) and a function for finding valid actions using grid values, and establishes a queue of actions to consider which total movement costs along the lowest-cost path that solves the start-to-goal movement of the drone. The lowest cost path is complete once the queue is empty and then returned to the quad - otherwise, an error is printed.
 
 
-### 2. In the starter code, we assume that the home position is where the drone first initializes, but in reality you need to be able to start planning from anywhere. Modify your code to read the global home location from the first line of the `colliders.csv` file and set that position as global home (`self.set_home_position()`) ###
+#### 2. In the starter code, we assume that the home position is where the drone first initializes, but in reality you need to be able to start planning from anywhere. Modify your code to read the global home location from the first line of the `colliders.csv` file and set that position as global home (`self.set_home_position()`) ####
 
 This was done within the following lines of code taken from the beginning of the `plan_path()` function:
 
@@ -78,7 +78,7 @@ This was done within the following lines of code taken from the beginning of the
     self.set_home_position(lon0, lat0, 0)
 ```
 
-### 3. In the starter code, we assume the drone takes off from map center, but you'll need to be able to takeoff from anywhere. Retrieve your current position in geodetic coordinates from `self._latitude`, `self._longitude` and `self._altitude`. Then use the utility function `global_to_local()` to convert to local position (using `self.global_home` as well, which you just set) ###
+#### 3. In the starter code, we assume the drone takes off from map center, but you'll need to be able to takeoff from anywhere. Retrieve your current position in geodetic coordinates from `self._latitude`, `self._longitude` and `self._altitude`. Then use the utility function `global_to_local()` to convert to local position (using `self.global_home` as well, which you just set) ####
 
 The local position relative to global home was found by doing the following in `plan_path()`:
 
@@ -93,7 +93,7 @@ The local position relative to global home was found by doing the following in `
 ```
 
 
-### 4. In the starter code, the `start` point for planning is hardcoded as map center. Change this to be your current local position. ###
+#### 4. In the starter code, the `start` point for planning is hardcoded as map center. Change this to be your current local position. ####
 
 Again, this was done by making the following adjustment to `plan_path()`:
 
@@ -102,7 +102,7 @@ Again, this was done by making the following adjustment to `plan_path()`:
     grid_start = (np.int(np.around(local_coordinates_NED[0] - north_offset)), np.int(np.around(local_coordinates_NED[1] - east_offset)))
 ```
 
-### 5. In the starter code, the goal position is hardcoded as some location 10 m north and 10 m east of map center. Modify this to be set as some arbitrary position on the grid given any geodetic coordinates (latitude, longitude) ###
+#### 5. In the starter code, the goal position is hardcoded as some location 10 m north and 10 m east of map center. Modify this to be set as some arbitrary position on the grid given any geodetic coordinates (latitude, longitude) ####
 
 This part was interesting. Originally, I had mistaken the problem as asking us to solve for any arbitrary latitude and longitude in the world. Quickly discovering that A* has a limited range of capability based on processing power and/or simulator size, I decided to instead cast these random coordinates on the grid boundary should they lie outside of the map (which is all but certain).
 
@@ -151,7 +151,7 @@ The following is the result, which still is able to take any latitude and longit
 ```
 
 
-### 6. Write your search algorithm. Minimum requirement here is to add diagonal motions to the A* implementation provided, and assign them a cost of sqrt(2). However, you're encouraged to get creative and try other methods from the lessons and beyond! ###
+#### 6. Write your search algorithm. Minimum requirement here is to add diagonal motions to the A* implementation provided, and assign them a cost of sqrt(2). However, you're encouraged to get creative and try other methods from the lessons and beyond! ####
 
 To incorporate actions of cost sqrt(2), both the individual actions themselves were added to the `Action` class, and more conditions for removing diagonal actions based on grid value after the proposed movement were added in the `valid_actions()` function:
 
@@ -228,7 +228,7 @@ It could have also been incorporated here instead, further down in the `a_star()
 Now the heuristic function is properly accounted for instead of apparently being entirely bypassed.
 
 
-### 7. Cull waypoints from the path you determine using search. ###
+#### 7. Cull waypoints from the path you determine using search. ####
 
 Waypoints were culled by performing collinearity checks in conjunction with a `prune_path()` function:
 
@@ -260,7 +260,7 @@ Waypoints were culled by performing collinearity checks in conjunction with a `p
 ```
 
 
-### 8. Now, a check on whether it all worked: sending waypoints to evaluate a flight path. ### 
+#### 8. Now, a check on whether it all worked: sending waypoints to evaluate a flight path. ####
 
 Here's a sample of a flight below!
 
