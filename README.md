@@ -1,9 +1,4 @@
-# Udacity Flying Car Nanodegree #
-# Project 2: 3D Motion Planning #
-
-## Description ##
-
-## Rubric Criteria: Explain the Starter Code ##
+## Project 2: 3D Motion Planning ##
 
 ### 1. Test that `motion_planning.py` is a modified version of `backyard_flyer_solution.py` for simple path planning. Verify that both scripts work. Then, compare them side by side and describe in words how each of the modifications implemented in `motion_planning.py` is functioning. ###
 
@@ -264,9 +259,8 @@ Waypoints were culled by performing collinearity checks in conjunction with a `p
     path = prune_path(path)
 ```
 
-## Rubric Criteria: Executing the flight ##
 
-### 8. This is simply a check on whether it all worked. Send the waypoints and the autopilot should fly you from start to goal! ###
+### 8. Now, a check on whether it all worked: sending waypoints to evaluate a flight path. ### 
 
 Here's a sample of a flight below!
 
